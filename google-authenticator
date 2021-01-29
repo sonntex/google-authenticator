@@ -1,0 +1,12 @@
+#!/bin/sh
+
+password=
+
+while true; do
+    new_password="$(pass show google/pin)$(oathtool --totp -b $(pass show google/authenticator))"
+    if [ "$password" != "$new_password" ]; then
+        password="$new_password"
+        echo "$password"
+    fi
+    sleep 1
+done
